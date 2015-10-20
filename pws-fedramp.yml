@@ -1,0 +1,58 @@
+resources:
+- name: nist-800-53
+  type: git
+  source:
+    uri: git@github.com:18F/control-masonry.git
+    branch: master
+    private_key: {{github-private-key}}
+- name: cloudfoundry-controls
+  type: git
+  source:
+    uri: git@github.com:cloudfoundry-community/compliance.git
+    branch: master
+    private_key: {{github-private-key}}
+- name: pws-system-details
+  type: git
+  source:
+    uri: git@github.com:joshuamckenty/pws-system-details.git
+    branch: master
+    private_key: {{github-private-key}}
+# TODO: Put a Semver in here somewhere
+- name: pws-fedramp-artifacts-rc
+  type: s3
+  source:
+    bucket: pws-fedramp-pipeline-artifacts
+    regexp: pws-fedramp-pipeline-(.*).tgz
+    access_key_id: {{s3-access-key-id}}
+    secret_access_key: {{s3-secret-access-key}}
+jobs:
+- name: 800-53-unit
+  plan:
+  - get: nist-800-53
+    trigger: true
+  - task: unit
+    file: nist-800-53/ci/unit.yml
+- name: cf-control-unit
+  plan:
+  - get: cloudfoundry-controls
+    trigger: true
+  - task: unit
+    file: cloudfoundry-controls/ci/unit.yml
+- name: merge-yamls
+  plan:
+  - get: cloudfoundry-controls
+    passed: [cf-control-unit]
+    trigger: true
+  - get: nist-800-53
+    passed: [800-53-unit]
+    trigger: true
+  - get: pws-system-details
+    trigger: true
+  - task: spruce-merge
+    # TODO: Finish the spruce task at https://github.com/opencontrol/concourse-spruce-task
+    config:
+      platform: linux
+      image: "docker:///ubuntu"
+      run:
+        path: echo
+        args: ["Hello, world!"]
