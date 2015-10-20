@@ -25,6 +25,18 @@ resources:
     regexp: pws-fedramp-pipeline-(.*).tgz
     access_key_id: {{s3-access-key-id}}
     secret_access_key: {{s3-secret-access-key}}
+- name: gitbook-task
+  type: git
+  source:
+    uri: git@github.com:opencontrol/concourse-gitbook-task.git
+    branch: master
+    private_key: {{github-private-key}}
+- name: spruce-merge-task
+  type: git
+  source:
+     uri: git@github.com:opencontrol/concourse-spruce-task.git
+     branch: master
+     private_key: {{github-private-key}}
 jobs:
 - name: 800-53-unit
   plan:
@@ -40,19 +52,26 @@ jobs:
     file: cloudfoundry-controls/ci/unit.yml
 - name: merge-yamls
   plan:
-  - get: cloudfoundry-controls
-    passed: [cf-control-unit]
-    trigger: true
-  - get: nist-800-53
-    passed: [800-53-unit]
-    trigger: true
-  - get: pws-system-details
-    trigger: true
+  - aggregate:
+    - get: cloudfoundry-controls
+      passed: [cf-control-unit]
+      trigger: true
+    - get: nist-800-53
+      passed: [800-53-unit]
+      trigger: true
+    - get: pws-system-details
+      trigger: true
+    - get: spruce-merge-task
+      trigger: true
   - task: spruce-merge
-    # TODO: Finish the spruce task at https://github.com/opencontrol/concourse-spruce-task
-    config:
-      platform: linux
-      image: "docker:///ubuntu"
-      run:
-        path: echo
-        args: ["Hello, world!"]
+    file: spruce-merge/task.yml
+  - put: pws-fedramp-artifacts-rc
+- name: gitbook-output
+  plan:
+  - get: pws-fedramp-artifacts-rc
+    passed: [merge-yamls]
+    trigger: true
+  - get: gitbook-task
+    trigger: true
+  - task: gitbook-pdf
+    file: gitbook-task/task.yml
