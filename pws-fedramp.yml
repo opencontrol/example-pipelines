@@ -22,7 +22,9 @@ resources:
   type: s3
   source:
     bucket: pws-fedramp-pipeline-artifacts
-    regexp: pws-fedramp-pipeline-(.*).tgz
+    region: us-west-1
+    private: true
+    versioned_file: ssp.yml
     access_key_id: {{s3-access-key-id}}
     secret_access_key: {{s3-secret-access-key}}
 - name: gitbook-task
@@ -31,12 +33,13 @@ resources:
     uri: git@github.com:opencontrol/concourse-gitbook-task.git
     branch: master
     private_key: {{github-private-key}}
-- name: spruce-merge-task
+- name: nessus-task
   type: git
   source:
-     uri: git@github.com:opencontrol/concourse-spruce-task.git
-     branch: master
-     private_key: {{github-private-key}}
+    uri: git@github.com:opencontrol/concourse-nessus-task.git
+    branch: master
+    private_key: {{github-private-key}}
+
 jobs:
 - name: 800-53-unit
   plan:
@@ -57,21 +60,77 @@ jobs:
       passed: [cf-control-unit]
       trigger: true
     - get: nist-800-53
-      passed: [800-53-unit]
+      # passed: [800-53-unit]
       trigger: true
     - get: pws-system-details
       trigger: true
-    - get: spruce-merge-task
-      trigger: true
+
   - task: spruce-merge
-    file: spruce-merge/task.yml
-  - put: pws-fedramp-artifacts-rc
-- name: gitbook-output
+    config:
+      platform: linux
+      image: docker:///opencontrol/spruce
+      inputs:
+      - name: nist-800-53
+      - name: cloudfoundry-controls
+      - name: pws-system-details
+      run:
+        path: spruce-up
+        args:
+          - pws-system-details/output/ssp.yml
+          - nist-800-53/data/standards/NIST-800-53.yaml
+          - cloudfoundry-controls/federal/800-53/controls.yml
+          - pws-system-details/system.yml
+
+  - task: git-add
+    config:
+      platform: linux
+      image: docker:///opencontrol/spruce
+      inputs:
+      - name: spruce-merge
+      run:
+        path: git-add-all
+        args: [spruce-merge/pws-system-details/output]
+
+  - put: pws-system-details
+    params:
+      repository: git-add/spruce-merge/pws-system-details
+
+- name: gitbook-output-pdf
   plan:
-  - get: pws-fedramp-artifacts-rc
+  - get: pws-system-details
     passed: [merge-yamls]
     trigger: true
   - get: gitbook-task
     trigger: true
   - task: gitbook-pdf
     file: gitbook-task/task.yml
+    config:
+      params:
+        book-repo: pws-system-details
+#  - put: pws-system-details
+- name: gitbook-output-poams
+  plan:
+  - get: pws-system-details
+    passed: [merge-yamls]
+    trigger: true
+  - get: gitbook-task
+    trigger: true
+  - task: gitbook-pdf
+    file: gitbook-task/waiver.yml
+    config:
+      params:
+        book-repo: pws-system-details
+  #- put: pws-system-details
+- name: output-nessus-config
+  plan:
+  - get: pws-system-details
+    passed: [merge-yamls]
+    trigger: true
+  - get: nessus-task
+    trigger: true
+  - task: nessus-config-generation
+    file: nessus-task/waiver.yml
+    config:
+      params:
+        book-repo: pws-system-details
+#  - put: pws-system-details
