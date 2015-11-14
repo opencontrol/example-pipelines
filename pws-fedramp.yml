@@ -76,12 +76,11 @@ jobs:
       - name: cloudfoundry-controls
       - name: pws-system-details
       run:
-        path: spruce-up
+        path: pws-system-details/jinjame.py
         args:
-          - pws-system-details/output/ssp.yml
-          - nist-800-53/data/standards/NIST-800-53.yaml
-          - cloudfoundry-controls/federal/800-53/controls.yml
-          - pws-system-details/system.yml
+          - nist-800-53/data/certifications
+          - cloudfoundry-controls/data/components
+          - pws-system-details/generated-system.yml
 
   - task: git-add
     config:
