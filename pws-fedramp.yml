@@ -72,15 +72,21 @@ jobs:
       platform: linux
       image: docker:///opencontrol/jinja
       inputs:
-      - name: nist-800-53
-      - name: cloudfoundry-controls
       - name: pws-system-details
+        path: .
+      - name: nist-800-53
+        path: nist-800-53
+      - name: cloudfoundry-controls
+        path: cloudfoundry-controls
       run:
-        path: jinjame
+        path: ./jinjame.py
         args:
           - nist-800-53/data/certifications
-          - cloudfoundry-controls/data/components
-          - pws-system-details/output/generated-system.yml
+          - nist-800-53/data/standards
+          - cloudfoundry-controls/data/components/CloudFoundry
+          - cloudfoundry-controls/data/components/AWS
+          - cloudfoundry-controls/data/components/18F
+          - output/generated-system.yml
 
   - task: git-add
     config:
@@ -90,11 +96,11 @@ jobs:
       - name: jinja-merge
       run:
         path: git-add-all
-        args: [jinja-merge/pws-system-details/output]
+        args: [jinja-merge/output]
 
   - put: pws-system-details
     params:
-      repository: git-add/spruce-merge/pws-system-details
+      repository: git-add/jinja-merge/output
 
 - name: yaml-to-markdown
   plan:

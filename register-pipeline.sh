@@ -1,1 +1,1 @@
-fly --target dragon configure --var "github-private-key=$(cat ~/.ssh/id_rsa)" --vars-from credentials.yml --config pws-fedramp.yml pws-fedramp 
+fly --target dragon set-pipeline --var "github-private-key=$(cat ~/.ssh/id_rsa)" --load-vars-from credentials.yml --config pws-fedramp.yml --pipeline pws-fedramp
