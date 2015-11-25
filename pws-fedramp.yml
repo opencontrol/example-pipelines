@@ -16,7 +16,7 @@ resources:
 - name: pws-system-details
   type: git
   source:
-    uri: git@github.com:opencontrol/example-pipelines.git
+    uri: git@github.com:beanpatch/pws-system-details.git
     branch: master
     private_key: {{github-private-key}}
 # TODO: Put a Semver in here somewhere
@@ -67,30 +67,30 @@ jobs:
     - get: pws-system-details
       trigger: true
 
-  - task: spruce-merge
+  - task: jinja-merge
     config:
       platform: linux
-      image: docker:///opencontrol/spruce
+      image: docker:///opencontrol/jinja
       inputs:
       - name: nist-800-53
       - name: cloudfoundry-controls
       - name: pws-system-details
       run:
-        path: pws-system-details/jinjame.py
+        path: jinjame
         args:
           - nist-800-53/data/certifications
           - cloudfoundry-controls/data/components
-          - pws-system-details/generated-system.yml
+          - pws-system-details/output/generated-system.yml
 
   - task: git-add
     config:
       platform: linux
       image: docker:///opencontrol/spruce
       inputs:
-      - name: spruce-merge
+      - name: jinja-merge
       run:
         path: git-add-all
-        args: [spruce-merge/pws-system-details/output]
+        args: [jinja-merge/pws-system-details/output]
 
   - put: pws-system-details
     params:
