@@ -1,0 +1,8 @@
+{% macro display_control(control, standard) -%}
+{{ control }}:
+{% set components = dpath_query("**/satisfies/%s/%s" % (standard, control)) %}
+{% for component in components["components"] %}
+  {{ component }}:
+    {{ components["components"][component]["satisfies"][standard][control] | yaml_dump(default_flow_style=True) }}
+{%- endfor %}
+{% endmacro %}

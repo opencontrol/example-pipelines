@@ -1,0 +1,12 @@
+author: jmckenty
+name: sample-yaml
+file: system.yml
+certification: FedRAMP-low
+date: ~
+system:
+  {% set standard = "NIST-800-53" %}
+  {{ standard }}:
+    {% for control in standards[standard] | sort -%}
+      {%- import 'control.block' as cblock with context -%}
+      {{ cblock.display_control(control, standard) | indent(4, True) }}
+    {% endfor %}
