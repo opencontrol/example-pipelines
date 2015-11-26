@@ -13,10 +13,10 @@ resources:
     branch: master
     private_key: {{github-private-key}}
 
-- name: pws-system-details
+- name: example-fedramp-system
   type: git
   source:
-    uri: git@github.com:beanpatch/pws-system-details.git
+    uri: git@github.com:opencontrol/example-pipelines.git
     branch: master
     private_key: {{github-private-key}}
 # TODO: Put a Semver in here somewhere
@@ -64,7 +64,7 @@ jobs:
     - get: nist-800-53
       passed: [800-53-unit]
       trigger: true
-    - get: pws-system-details
+    - get: example-fedramp-system
       trigger: true
 
   - task: jinja-merge
@@ -72,7 +72,7 @@ jobs:
       platform: linux
       image: docker:///opencontrol/jinja
       inputs:
-      - name: pws-system-details
+      - name: example-fedramp-system
         path: .
       - name: nist-800-53
         path: nist-800-53
@@ -98,13 +98,13 @@ jobs:
         path: git-add-all
         args: [jinja-merge/output]
 
-  - put: pws-system-details
+  - put: example-fedramp-system
     params:
       repository: git-add/jinja-merge/output
 
 - name: yaml-to-markdown
   plan:
-    - get: pws-system-details
+    - get: example-fedramp-system
       passed: [merge-yamls]
       trigger: true
     - get: yaml-to-markdown-task
@@ -112,7 +112,7 @@ jobs:
 
 - name: gitbook-output-pdf
   plan:
-  - get: pws-system-details
+  - get: example-fedramp-system
     passed: [merge-yamls]
     trigger: true
   - get: gitbook-task
@@ -121,12 +121,12 @@ jobs:
     file: gitbook-task/task.yml
     config:
       params:
-        book-repo: pws-system-details
+        book-repo: example-fedramp-system
 #  - put: pws-system-details
 
 - name: gitbook-output-poams
   plan:
-  - get: pws-system-details
+  - get: example-fedramp-system
     passed: [merge-yamls]
     trigger: true
   - get: gitbook-task
@@ -135,12 +135,12 @@ jobs:
     file: gitbook-task/waiver.yml
     config:
       params:
-        book-repo: pws-system-details
+        book-repo: example-fedramp-system
   #- put: pws-system-details
 
 - name: output-nessus-config
   plan:
-  - get: pws-system-details
+  - get: example-fedramp-system
     passed: [merge-yamls]
     trigger: true
   - get: nessus-task
@@ -149,5 +149,5 @@ jobs:
     file: nessus-task/waiver.yml
     config:
       params:
-        book-repo: pws-system-details
+        book-repo: example-fedramp-system
 #  - put: pws-system-details
