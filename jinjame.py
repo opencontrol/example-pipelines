@@ -11,7 +11,6 @@ import datetime
 PATH = os.path.dirname(os.path.abspath(__file__))
 TEMPLATE_ENVIRONMENT = Environment(
     autoescape=False,
-    loader=FileSystemLoader(os.path.join(PATH, 'templates')),
     trim_blocks=True,
     lstrip_blocks=True)
 
@@ -24,9 +23,11 @@ def render_template(template_filename, context):
 
 
 @click.command()
+@click.option('--template_path', default="./templates", help='Path to templates')
+@click.option('--template_file', default="system-data.template", help='Template to process')
 @click.argument('inputs', nargs=-1, type=click.Path(exists=True))
 @click.argument('output', nargs=1, type=click.File('w'))
-def create_ssp_yaml(inputs, output):
+def create_ssp_yaml(template_path, template_file, inputs, output):
     context = {'inputs' : []}
     for path in inputs:
         for filename in glob.glob("%s/*.y*ml" % (path)):
@@ -55,7 +56,9 @@ def create_ssp_yaml(inputs, output):
                     'dpath_loop' : dpath_loop,
                     'dpath_get' : dpath_get
                     })
-    yml = render_template('pws-system.template', context)
+
+    TEMPLATE_ENVIRONMENT.loader = FileSystemLoader(os.path.join(PATH, template_path))
+    yml = render_template(template_file, context)
     output.write(yml)
 
 
