@@ -2,11 +2,11 @@
 {{ control }}:
 {%- for path, component_set in dpath_loop("**/satisfies/%s/%s" % (standard, control)) -%}
   {{ " " }}
-  # {{ path }}
+  - # {{ path }}
   {% if component_set is mapping %}
-  {{ component_set | yaml_dump(default_flow_style=True) }}
+    {{ component_set | yaml_dump(default_flow_style=True) }}
   {% else %}
-  {{ component_set }}
+    {{ component_set }}
   {% endif %}
 {%- else -%}
  {{ " " }} ~ {{ " " }}
