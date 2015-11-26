@@ -81,11 +81,9 @@ jobs:
       run:
         path: ./jinjame.py
         args:
-          - nist-800-53/data/certifications
-          - nist-800-53/data/standards
-          - cloudfoundry-controls/data/components/CloudFoundry
-          - cloudfoundry-controls/data/components/AWS
-          - cloudfoundry-controls/data/components/18F
+          - nist-800-53/data/certifications/*.y*ml
+          - nist-800-53/data/standards/*.y*ml
+          - cloudfoundry-controls/data/components/**/*.y*ml
           - output/generated-system.yml
 
   - task: git-add

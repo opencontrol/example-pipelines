@@ -6,7 +6,7 @@ inputs:
   {% endfor %}
 certification: FedRAMP-low
 date: {{ None | timestamp }}
-system:
+security_plan:
   {% for (path, standard_set) in dpath_loop("**/standards") -%}
   {% for standard in standard_set.keys() %}
   {{ standard }}:
@@ -16,9 +16,3 @@ system:
     {% endfor %}
   {% endfor %}
   {% endfor %}
-
-{#
-
-
-
-#}

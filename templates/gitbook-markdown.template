@@ -1,0 +1,8 @@
+{% set security_plan = dpath_get("**/security_plan") %}
+{% for standard in security_plan.keys() %}
+# {{ standard }}
+{% for control in security_plan[standard].keys() %}
+## {{ control }}
+{{ security_plan[standard][control] }}
+{% endfor %}
+{% endfor %}

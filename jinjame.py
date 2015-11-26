@@ -25,12 +25,12 @@ def render_template(template_filename, context):
 @click.command()
 @click.option('--template_path', default="./templates", help='Path to templates')
 @click.option('--template_file', default="system-data.template", help='Template to process')
-@click.argument('inputs', nargs=-1, type=click.Path(exists=True))
+@click.argument('inputs', nargs=-1)
 @click.argument('output', nargs=1, type=click.File('w'))
 def create_ssp_yaml(template_path, template_file, inputs, output):
     context = {'inputs' : []}
-    for path in inputs:
-        for filename in glob.glob("%s/*.y*ml" % (path)):
+    for path_glob in inputs:
+        for filename in glob.glob(path_glob):
             print ("loading %s" % (filename))
             obj_tree = yaml.load(open(filename, 'r'))
             context['inputs'].append(filename)
