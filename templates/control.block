@@ -1,8 +1,13 @@
 {% macro display_control(control, standard) -%}
 {{ control }}:
-{% set components = dpath_query("**/satisfies/%s/%s" % (standard, control)) %}
-{% for component in components["components"] %}
-  {{ component }}:
-    {{ components["components"][component]["satisfies"][standard][control] | yaml_dump(default_flow_style=True) }}
+{% for path, component_set in dpath_loop("**/satisfies/%s/%s" % (standard, control)) %}
+  # {{ path }}
+  {{ component_set | yaml_dump(default_flow_style=True) }}
+  {#
+  {% for component_key, component in component_set.iteritems() %}
+  {{ component | yaml_dump(default_flow_style=True) }}
+  {%- endfor %}
+  #}
+  {#  {{ component["satisfies"][standard][control] | yaml_dump(default_flow_style=True) }} #}
 {%- endfor %}
 {% endmacro %}

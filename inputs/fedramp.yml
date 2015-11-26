@@ -1,6 +1,0 @@
-# FedRAMP-low.yaml
----
-standards:
-  NIST-800-53:
-    AC-2: ~
-    AC-3: ~

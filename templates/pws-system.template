@@ -1,12 +1,24 @@
 author: jmckenty
 name: sample-yaml
-file: system.yml
+inputs:
+  {% for input_path in inputs %}
+  - {{ input_path }}
+  {% endfor %}
 certification: FedRAMP-low
-date: ~
+date: {{ None | timestamp }}
 system:
-  {% set standard = "NIST-800-53" %}
+  {% for (path, standard_set) in dpath_loop("**/standards") -%}
+  {% for standard in standard_set.keys() %}
   {{ standard }}:
-    {% for control in standards[standard] | sort -%}
+    {% for control in standard_set[standard].keys() | sort -%}
       {%- import 'control.block' as cblock with context -%}
       {{ cblock.display_control(control, standard) | indent(4, True) }}
     {% endfor %}
+  {% endfor %}
+  {% endfor %}
+
+{#
+
+
+
+#}
