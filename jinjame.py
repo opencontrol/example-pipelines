@@ -31,7 +31,7 @@ def create_ssp_yaml(inputs, output):
     context = {'inputs' : []}
     for path in inputs:
         for filename in glob.glob("%s/*.y*ml" % (path)):
-            print "loading %s" % (filename)
+            print ("loading %s" % (filename))
             obj_tree = yaml.load(open(filename, 'r'))
             context['inputs'].append(filename)
             if 'system' not in obj_tree: # old schema
@@ -39,15 +39,15 @@ def create_ssp_yaml(inputs, output):
             else:
                 dpath.util.merge(context,
                     { obj_tree['system']: { obj_tree['name']: obj_tree } })
-    print pyaml.dump(context)
+    print (pyaml.dump(context))
     def dpath_loop(expr):
-        print "Looping thru dpath of %s" % (expr)
+        print ("Looping thru dpath of %s" % (expr))
         return dpath.util.search(context, expr, yielded=True)
     def dpath_get(expr):
-        print "Getting %s" % (expr)
+        print ("Getting %s" % (expr))
         return dpath.util.get(context, expr)
     def dpath_search(expr):
-        print "Searching for %s" % (expr)
+        print ("Searching for %s" % (expr))
         try:
             return dpath.util.search(context, expr)
         except:
