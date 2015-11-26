@@ -3,7 +3,6 @@
 import click
 import os
 import yaml
-import pyaml
 import dpath
 import glob
 from jinja2 import Environment, FileSystemLoader
@@ -39,7 +38,7 @@ def create_ssp_yaml(inputs, output):
             else:
                 dpath.util.merge(context,
                     { obj_tree['system']: { obj_tree['name']: obj_tree } })
-    print (pyaml.dump(context))
+    # print (pyaml.dump(context))
     def dpath_loop(expr):
         print ("Looping thru dpath of %s" % (expr))
         return dpath.util.search(context, expr, yielded=True)
