@@ -121,6 +121,20 @@ jobs:
           - output/generated-system.yml
           - output/generated-system.md
 
+  - task: git-add
+    config:
+      platform: linux
+      image: docker:///opencontrol/spruce
+      inputs:
+      - name: jinja-merge
+      run:
+        path: git-add-all
+        args: [jinja-merge/output]
+
+  - put: example-fedramp-system
+    params:
+      repository: git-add/jinja-merge/output
+
 - name: gitbook-output-pdf
   plan:
   - get: example-fedramp-system
