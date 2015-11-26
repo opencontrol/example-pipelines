@@ -102,11 +102,24 @@ jobs:
 
 - name: yaml-to-markdown
   plan:
-    - get: example-fedramp-system
-      passed: [merge-yamls]
-      trigger: true
-    - get: yaml-to-markdown-task
-      trigger: true
+  - get: example-fedramp-system
+    passed: [merge-yamls]
+    trigger: true
+
+  - task: jinja-merge
+    config:
+      platform: linux
+      image: docker:///opencontrol/jinja
+      inputs:
+      - name: example-fedramp-system
+        path: .
+      run:
+        path: ./jinjame.py
+        args:
+          - --template_path='templates/ssp-gitbook'
+          - --template_file='gitbook-markdown.template'
+          - output/generated-system.yml
+          - output/generated-system.md
 
 - name: gitbook-output-pdf
   plan:
