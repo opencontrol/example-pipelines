@@ -1,3 +1,5 @@
+{% include 'header.block' with context %}
+
 {% set security_plan = dpath_get("**/security_plan") %}
 {% for standard in security_plan.keys() %}
 # {{ standard }}

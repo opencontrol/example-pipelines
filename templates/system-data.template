@@ -1,6 +1,6 @@
 author: jmckenty
 name: sample-yaml
-inputs:
+input_files:
   {% for input_path in inputs %}
   - {{ input_path }}
   {% endfor %}
