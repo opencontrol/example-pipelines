@@ -11,7 +11,11 @@ import dpath
 import glob
 from jinja2 import Environment, FileSystemLoader
 import datetime
-from UserDict import IterableUserDict
+try:
+    from UserDict import IterableUserDict as IUD
+except ImportError:
+    from collections import UserDict as IUD
+
 
 PATH = os.path.dirname(os.path.abspath(__file__))
 TEMPLATE_ENVIRONMENT = Environment(
@@ -53,7 +57,7 @@ def yaml_query(expr, context, separator=";"):
 
 # Using tuples of (node, [path items], parent_node)
 # allows us to make PARENT addressable nodes
-class oc_node(IterableUserDict):
+class oc_node(IUD):
     def __init__(self, value, path_seq, context):
         self.path_seq = path_seq
         self.context = context
