@@ -1,14 +1,29 @@
 {% macro display_control(control, standard) -%}
 {{ control }}:
-{%- for path, component_set in dpath_loop("**/satisfies/%s/%s" % (standard, control)) -%}
+{%- for path, component_set in dpath_loop("**/satisfies/%s/%s" % (standard, control), data_tree) -%}
   {{ " " }}
   - # {{ path }}
   {% if component_set is mapping %}
-    {{ component_set | yaml_dump(default_flow_style=True) }}
+    {{ yaml_dump(component_set) }}
   {% else %}
     {{ component_set }}
   {% endif %}
 {%- else -%}
  {{ " " }} ~ {{ " " }}
 {%- endfor %}
+{% endmacro %}
+
+
+{% macro display_component_details(control, standard) %}
+    {{ control }}:
+{%- for path, component_set in dpath_loop("**/satisfies/%s/%s" % (standard, control), data_tree) -%}
+{% set path_bits = path.split("/") %}
+{% set component = data_tree[path_bits[0]][path_bits[1]] %}
+  {{ " " }}
+      - {{ component.name }}:
+        # {{ path }}
+        {{ yaml_dump(component, indent=2) | indent(4) }}
+{%- else -%}
+ {{ " " }} ~ {{ " " }}
+{%- endfor -%}
 {% endmacro %}

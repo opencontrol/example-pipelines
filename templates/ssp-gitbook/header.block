@@ -8,6 +8,6 @@ For Authorized Use Only_
 
 ## OpenControl generated using the following inputs:
 
-{% for input_file in dpath_get("**/input_files") %}
+{% for input_file in dpath_get("**/input_files", data_tree) %}
  - {{ input_file }}
 {% endfor %}

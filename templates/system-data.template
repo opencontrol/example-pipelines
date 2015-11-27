@@ -7,12 +7,33 @@ input_files:
 certification: FedRAMP-low
 date: {{ None | timestamp }}
 security_plan:
-  {% for (path, standard_set) in dpath_loop("**/standards") -%}
+  {% for (path, standard_set) in dpath_loop("**/standards", data_tree) %}
   {% for standard in standard_set.keys() %}
   {{ standard }}:
-    {% for control in standard_set[standard].keys() | sort -%}
-      {%- import 'control.block' as cblock with context -%}
-      {{ cblock.display_control(control, standard) | indent(4, True) }}
+    {% for control in standard_set[standard].keys() | sort %}
+      {{ control }}:
+      {%- for path, component_set in dpath_loop("**/satisfies/%s/%s" % (standard, control), data_tree) -%}
+      {% set path_bits = path.split("/") %}
+      {% set component = data_tree[path_bits[0]][path_bits[1]] %}
+      {{ " " }}
+        - {{ component.name }}:
+          # {{ path }}
+          {{- yaml_dump(component, indent=2) | indent(10) }}
+      {% else -%}
+      {{ " " }} ~ {{ " " }}
+      {% endfor -%}
+
     {% endfor %}
   {% endfor %}
   {% endfor %}
+
+{#
+{% for (path, control) in dpath_dot_loop("**.satisfies.NIST-800-53.SI-4", data_tree) %}
+  {{ path }}
+  {{ control }}
+{% endfor %}
+
+
+  {% import 'control.block' as cblock with context %}
+    {{ cblock.display_component_details(control, standard) }}
+#}
