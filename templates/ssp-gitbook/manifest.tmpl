@@ -1,0 +1,13 @@
+# Each leaf in the generated YAML tree will produce a page
+# Also, a SUMMARY.md will be generated to match the produced docs
+---
+  pages:
+    - filename: Introduction.md
+      template: introduction.tmpl
+      dpath_query: "*"
+{% for control in yaml_get("**;standards;NIST-800-53", data_tree).keys() | sort %}
+    - filename: {{ control }}.md
+      template: control.tmpl
+      dpath_query: "*"
+      extra_context: { 'control' : {{ control }}}
+{% endfor %}

@@ -1,0 +1,9 @@
+author: jmckenty
+name: sample-yaml
+input_files:
+  {% for input_path in inputs %}
+  - {{ input_path }}
+  {% endfor %}
+certification: FedRAMP-low
+date: {{ None | timestamp }}
+{{ yaml_dump(data_tree, indent=2) }}

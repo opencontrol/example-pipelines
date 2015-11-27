@@ -11,6 +11,7 @@ import dpath
 import glob
 from jinja2 import Environment, FileSystemLoader
 import datetime
+from UserDict import IterableUserDict
 
 PATH = os.path.dirname(os.path.abspath(__file__))
 TEMPLATE_ENVIRONMENT = Environment(
@@ -27,9 +28,9 @@ TEMPLATE_ENVIRONMENT.filters['timestamp'] = datetime.datetime.now
 def dpath_dot_loop(expr, context):
     return dpath.util.search(context, expr, yielded=True, separator=".")
 
-def dpath_loop(expr, context):
+def dpath_loop(expr, context, separator=";"):
     print ("Looping thru dpath of %s" % (expr))
-    return dpath.util.search(context, expr, yielded=True)
+    return dpath.util.search(context, expr, yielded=True, separator=separator)
 
 def dpath_get(expr, context):
     print ("Getting %s" % (expr))
@@ -42,14 +43,49 @@ def dpath_search(expr, context):
     except:
         return ""
 
+def yaml_get(expr, context, separator=";"):
+    return next(yaml_query(expr, context, separator=separator))
+
+def yaml_query(expr, context, separator=";"):
+    for (path, node) in dpath_loop(expr, context, separator=separator):
+        path_seq = path.split(";")
+        yield oc_node(node, path_seq, context)
+
+# Using tuples of (node, [path items], parent_node)
+# allows us to make PARENT addressable nodes
+class oc_node(IterableUserDict):
+    def __init__(self, value, path_seq, context):
+        self.path_seq = path_seq
+        self.context = context
+        self.data = value
+    #
+    # def __repr__(self):
+    #     return self.value
+    #
+    # def __str__(self):
+    #     return str(self.value)
+    #
+    # def __getitem__(self, item):
+    #     return data.__getitem__(item)
+
+    @property
+    def parent_node(self):
+        return yaml_get(self.path_seq[:-1], self.context)
+
+
 TEMPLATE_ENVIRONMENT.globals['dpath_dot_loop'] = dpath_dot_loop
 TEMPLATE_ENVIRONMENT.globals['dpath_loop'] = dpath_loop
 TEMPLATE_ENVIRONMENT.globals['dpath_get'] = dpath_get
 TEMPLATE_ENVIRONMENT.globals['dpath_search'] = dpath_search
 TEMPLATE_ENVIRONMENT.globals['dpath'] = dpath
+TEMPLATE_ENVIRONMENT.globals['yaml_get'] = yaml_get
+TEMPLATE_ENVIRONMENT.globals['yaml_query'] = yaml_query
 
 def render_template(template_filename, context):
     return TEMPLATE_ENVIRONMENT.get_template(template_filename).render(context)
+
+def read_template_as_yaml(template_filename, context):
+    return yaml.load(render_template(template_filename, context))
 
 def load_data_tree(inputs):
     context = {'inputs' : []}
@@ -67,7 +103,11 @@ def load_data_tree(inputs):
     context.update({'data_tree' : data_tree})
     return context
 
-@click.command()
+@click.group()
+def cli():
+    pass
+
+@cli.command('ssp')
 @click.option('--template_path', default="./templates", help='Path to templates')
 @click.option('--template_file', default="system-data.template", help='Template to process')
 @click.argument('inputs', nargs=-1)
@@ -79,5 +119,26 @@ def create_ssp_yaml(template_path, template_file, inputs, output):
     output.write(yml)
 
 
+@cli.command('markdown')
+@click.option('--template_path', default="./templates", help='Path to templates')
+@click.option('--manifest_file', default="manifest.tmpl", help='Template to process')
+@click.argument('inputs', nargs=-1)
+@click.argument('output_path', nargs=1, type=click.Path(exists=True))
+def create_docbook_markdown(template_path, manifest_file, inputs, output_path):
+    context = load_data_tree(inputs)
+    TEMPLATE_ENVIRONMENT.loader = FileSystemLoader(os.path.join(PATH, template_path))
+    manifest = read_template_as_yaml(manifest_file, context)
+    for page in manifest['pages']:
+        print ("Generating ", page['filename'])
+        with open("%s/%s" % (output_path, page['filename']), 'w') as output:
+            local_context = {'data_tree' : dpath_search(page['dpath_query'], context['data_tree'])}
+            if 'extra_context' in page:
+                local_context.update(page['extra_context'])
+            # print ("Local context: ")
+            # print pyaml.dump(local_context)
+            yml = render_template(page['template'], local_context)
+            output.write(yml.encode('utf-8'))
+
+
 if __name__ == "__main__":
-    create_ssp_yaml()
+    cli()

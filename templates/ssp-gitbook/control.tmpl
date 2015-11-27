@@ -1,0 +1,24 @@
+# {{ control }}
+{% set control_obj = yaml_get("**;%s" % (control), data_tree) %}
+{% set components = yaml_query("**;satisfies;NIST-800-53;%s" % (control), data_tree) %}
+## Addressed by:
+{% for component in components %}
+ - {{ component.parent_node.parent_node.parent_node.name }}
+{% endfor %}
+
+{% set components = yaml_query("**;satisfies;NIST-800-53;%s" % (control), data_tree) %}
+{% for component in components %}
+
+{% if component.data is mapping %}
+{% for subcontrol in component.data %}
+## {{ control }} {{ subcontrol | string }}
+{{ component.data[subcontrol] | string }}
+
+{% endfor %}
+{% else %}
+{{ component.data }}
+
+{% endif %}
+
+
+{% endfor %}

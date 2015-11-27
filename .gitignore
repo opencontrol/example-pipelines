@@ -1,4 +1,5 @@
 credentials.yml
-output/test-output.yml
-output/test-gitbook.md
+output/*.yml
+output/*.md
 cred.yml
+*.pyc
