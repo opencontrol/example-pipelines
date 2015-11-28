@@ -81,10 +81,12 @@ jobs:
       run:
         path: ./jinjame.py
         args:
+          - ssp
+          - --template_file='data_tree.tmpl'
           - nist-800-53/data/certifications/*.y*ml
           - nist-800-53/data/standards/*.y*ml
           - cloudfoundry-controls/data/components/**/*.y*ml
-          - output/generated-system.yml
+          - output/data_tree.yml
 
   - task: git-add
     config:
@@ -116,10 +118,11 @@ jobs:
       run:
         path: ./jinjame.py
         args:
-          - --template_path='templates/ssp-gitbook'
-          - --template_file='gitbook-markdown.template'
-          - output/generated-system.yml
-          - output/generated-system.md
+          - markdown
+          - --template_path='./templates/ssp-gitbook'
+          - --manifest_file='manifest.tmpl'
+          - output/data_tree.yml
+          - output/
 
   - task: git-add
     config:

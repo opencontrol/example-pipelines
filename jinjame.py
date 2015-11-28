@@ -120,7 +120,7 @@ def create_ssp_yaml(template_path, template_file, inputs, output):
     context = load_data_tree(inputs)
     TEMPLATE_ENVIRONMENT.loader = FileSystemLoader(os.path.join(PATH, template_path))
     yml = render_template(template_file, context)
-    output.write(yml)
+    output.write(yml.encode('utf-8'))
 
 
 @cli.command('markdown')
