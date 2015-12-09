@@ -32,7 +32,7 @@ TEMPLATE_ENVIRONMENT.filters['timestamp'] = datetime.datetime.now
 def dpath_dot_loop(expr, context):
     return dpath.util.search(context, expr, yielded=True, separator=".")
 
-def dpath_loop(expr, context, separator=";"):
+def dpath_loop(expr, context, separator="/"):
     print ("Looping thru dpath of %s" % (expr))
     return dpath.util.search(context, expr, yielded=True, separator=separator)
 
@@ -47,12 +47,12 @@ def dpath_search(expr, context):
     except:
         return ""
 
-def yaml_get(expr, context, separator=";"):
+def yaml_get(expr, context, separator="/"):
     return next(yaml_query(expr, context, separator=separator))
 
-def yaml_query(expr, context, separator=";"):
+def yaml_query(expr, context, separator="/"):
     for (path, node) in dpath_loop(expr, context, separator=separator):
-        path_seq = path.split(";")
+        path_seq = path.split(separator)
         yield oc_node(node, path_seq, context)
 
 # Using tuples of (node, [path items], parent_node)
@@ -98,9 +98,10 @@ def load_data_tree(inputs):
         for filename in glob.glob(path_glob):
             print ("loading %s" % (filename))
             obj_tree = yaml.load(open(filename, 'r'))
-            context['inputs'].append(filename)
+            short_filename = filename.split("/")[-1]
+            context['inputs'].append(short_filename)
             if 'system' not in obj_tree: # old schema
-                dpath.util.merge(data_tree, { filename: obj_tree })
+                dpath.util.merge(data_tree, { short_filename: obj_tree })
             else:
                 dpath.util.merge(data_tree,
                     { obj_tree['system']: { obj_tree['name']: obj_tree } })

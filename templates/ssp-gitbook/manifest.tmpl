@@ -5,7 +5,7 @@
     - filename: Introduction.md
       template: introduction.tmpl
       dpath_query: "*"
-{% for control in yaml_get("**;standards;NIST-800-53", data_tree).keys() | sort %}
+{% for control in yaml_get("**/standards/NIST-800-53", data_tree).keys() | sort %}
     - filename: {{ control }}.md
       template: control.tmpl
       dpath_query: "*"
