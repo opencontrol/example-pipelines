@@ -1,18 +1,18 @@
 # SC-7
 ## Addressed by:
- - Sophos UTM
- - Access Control List
  - Amazon Virtual Private Cloud
+ - Access Control List
+ - Sophos UTM
  - Amazon Elastic Compute Cloud
  - Application Security Groups
 
 
 ## SC-7 b
-- Sophos UTM 9 Endpoint Protection is deployed and configured on all instances.
-
-
-## SC-7 a
-- Sophos UTM 9 for AWS is deployed and configured on all instances
+- 18F utilizes the AWS Virtual Private Cloud (VPC), which provides a private subnet within the AWS cloud. Each VPC is configured to utilize Routing Rules, Subnet Rules, and Security Group Rules. Each of these controls must have appropriate rules and routes in-place before any external service is able to reach a host within AWS.
+  - Each VPC is configured to utilize Routing Tables, and Security Groups.  Each of these controls must have appropriate rules and routes in-place before any external service is able to reach a host within Cloud Foundry.
+  - Sophos UTM 9 Endpoint Protection is deployed and configured on all instances.
+  - Host Based Firewall rules are enforced to provide security in depth
+  - Each Amazon VPC is a distinct, isolated network within the cloud; network traffic within each Amazon VPC is isolated from all other Amazon VPCs
 
 
 
@@ -25,12 +25,12 @@
 
 
 
+## SC-7 a
+- Sophos UTM 9 for AWS is deployed and configured on all instances
+
+
 ## SC-7 b
-- 18F utilizes the AWS Virtual Private Cloud (VPC), which provides a private subnet within the AWS cloud. Each VPC is configured to utilize Routing Rules, Subnet Rules, and Security Group Rules. Each of these controls must have appropriate rules and routes in-place before any external service is able to reach a host within AWS.
-  - Each VPC is configured to utilize Routing Tables, and Security Groups.  Each of these controls must have appropriate rules and routes in-place before any external service is able to reach a host within Cloud Foundry.
-  - Sophos UTM 9 Endpoint Protection is deployed and configured on all instances.
-  - Host Based Firewall rules are enforced to provide security in depth
-  - Each Amazon VPC is a distinct, isolated network within the cloud; network traffic within each Amazon VPC is isolated from all other Amazon VPCs
+- Sophos UTM 9 Endpoint Protection is deployed and configured on all instances.
 
 
 
