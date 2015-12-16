@@ -1,19 +1,10 @@
 # SC-7
 ## Addressed by:
- - Application Security Groups
  - Amazon Virtual Private Cloud
  - Amazon Elastic Compute Cloud
  - Access Control List
  - Sophos UTM
-
-
-## SC-7 a
-- Cloud Foundry implements network traffic rules using Linux iptables on the component VMs. Operators can configure rules to prevent system access from external networks and between internal components, and to restrict applications from establishing connections over the DEA network interface.
-- Cloud Foundry recommends that you use Cloud Foundry ASGs to specify egress access rules for your applications. This functionality enables you to more securely restrict application outbound traffic to predefined routes.
-- Spoofing: If an IP, MAC, or ARP spoofing attack bypasses the physical firewall for the deployment, Cloud Foundry network traffic rules help prevent the attack from accessing application containers. Cloud Foundry uses application isolation, operating system restrictions, and encrypted connections to further mitigate risk.
-
-
-
+ - Application Security Groups
 
 
 ## SC-7 b
@@ -49,6 +40,15 @@
 
 ## SC-7 a
 - Sophos UTM 9 for AWS is deployed and configured on all instances
+
+
+
+
+
+## SC-7 a
+- Cloud Foundry implements network traffic rules using Linux iptables on the component VMs. Operators can configure rules to prevent system access from external networks and between internal components, and to restrict applications from establishing connections over the DEA network interface.
+- Cloud Foundry recommends that you use Cloud Foundry ASGs to specify egress access rules for your applications. This functionality enables you to more securely restrict application outbound traffic to predefined routes.
+- Spoofing: If an IP, MAC, or ARP spoofing attack bypasses the physical firewall for the deployment, Cloud Foundry network traffic rules help prevent the attack from accessing application containers. Cloud Foundry uses application isolation, operating system restrictions, and encrypted connections to further mitigate risk.
 
 
 
