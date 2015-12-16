@@ -2,8 +2,8 @@
 ## Addressed by:
  - Nessus
  - S3
- - Amazon Machine Images
  - Amazon Elastic Block Store
+ - Amazon Machine Images
  - Manifests
  - BOSH Stemcells
 
@@ -21,15 +21,15 @@ Updates to new BOSH stemcells are located and stored within Amazon S3 http://bos
 
 
 ## CM-6 a
-- DevOps and Security Engineers maintain the baseline configuration for VPC, EBS and AMIs.  Best practices, FISMA compliant AMIs, and hardened cloud formation templates are utilized as there are no benchmarks available.
-- The organization uses FISMA compliant and hardened AMIs within its AWS infrastructure
+- DevOps and Security Engineers maintain the baseline configuration for VPC, EBS and AMIs.  Best practices, FISMA compliant AMIs are utilized as there are no benchmarks available.
 
 
 
 
 
 ## CM-6 a
-- DevOps and Security Engineers maintain the baseline configuration for VPC, EBS and AMIs.  Best practices, FISMA compliant AMIs are utilized as there are no benchmarks available.
+- DevOps and Security Engineers maintain the baseline configuration for VPC, EBS and AMIs.  Best practices, FISMA compliant AMIs, and hardened cloud formation templates are utilized as there are no benchmarks available.
+- The organization uses FISMA compliant and hardened AMIs within its AWS infrastructure
 
 
 
