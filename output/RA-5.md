@@ -1,14 +1,9 @@
 # RA-5
 ## Addressed by:
- - AlienVault
  - OWASP Zap
+ - AlienVault
  - Amazon Machine Images
  - Nessus
-
-
-AlienVault USM for AWS runs AWS friendly Authenticated vulnerability scans within the AWS infrastructure
-
-
 
 
 ## RA-5 b
@@ -31,6 +26,11 @@ OWASP Zap is used to conduct web Application scanning primarily
 for the OWASP Top 10. 18F uses it as an integrated security testing tool for finding vulnerabilities in web applications. 18F will provide more automated functionally of security tests using OWASP ZAP and Jenkins for its 
 software development lifecycle and continuous integration functions.
 
+
+
+
+
+AlienVault USM for AWS runs AWS friendly Authenticated vulnerability scans within the AWS infrastructure
 
 
 
