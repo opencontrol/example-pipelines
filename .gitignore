@@ -1,5 +1,5 @@
 credentials.yml
-output/*.yml
-output/*.md
+# output/*.yml
+# output/*.md
 cred.yml
 *.pyc
