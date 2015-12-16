@@ -83,7 +83,7 @@ jobs:
         args:
           - ssp
           - --template_path='./templates/'
-          - --template_file='data_tree.tmpl'
+          - --template_file='datatree.tmpl'
           - nist-800-53/data/certifications/*.y*ml
           - nist-800-53/data/standards/*.y*ml
           - cloudfoundry-controls/data/components/**/*.y*ml
