@@ -1,27 +1,14 @@
 # SC-7
 ## Addressed by:
- - Application Security Groups
- - Amazon Virtual Private Cloud
+ - Access Control List
  - Sophos UTM
  - Amazon Elastic Compute Cloud
- - Access Control List
+ - Amazon Virtual Private Cloud
+ - Application Security Groups
 
 
 ## SC-7 a
-- Cloud Foundry implements network traffic rules using Linux iptables on the component VMs. Operators can configure rules to prevent system access from external networks and between internal components, and to restrict applications from establishing connections over the DEA network interface.
-- Cloud Foundry recommends that you use Cloud Foundry ASGs to specify egress access rules for your applications. This functionality enables you to more securely restrict application outbound traffic to predefined routes.
-- Spoofing: If an IP, MAC, or ARP spoofing attack bypasses the physical firewall for the deployment, Cloud Foundry network traffic rules help prevent the attack from accessing application containers. Cloud Foundry uses application isolation, operating system restrictions, and encrypted connections to further mitigate risk.
-
-
-
-
-
-## SC-7 b
-- 18F utilizes the AWS Virtual Private Cloud (VPC), which provides a private subnet within the AWS cloud. Each VPC is configured to utilize Routing Rules, Subnet Rules, and Security Group Rules. Each of these controls must have appropriate rules and routes in-place before any external service is able to reach a host within AWS.
-  - Each VPC is configured to utilize Routing Tables, and Security Groups.  Each of these controls must have appropriate rules and routes in-place before any external service is able to reach a host within Cloud Foundry.
-  - Sophos UTM 9 Endpoint Protection is deployed and configured on all instances.
-  - Host Based Firewall rules are enforced to provide security in depth
-  - Each Amazon VPC is a distinct, isolated network within the cloud; network traffic within each Amazon VPC is isolated from all other Amazon VPCs
+- ACLs, or traffic flow policies, are established on each managed interface, which manage and enforce the flow of traffic.
 
 
 
@@ -47,8 +34,21 @@
 
 
 
+## SC-7 b
+- 18F utilizes the AWS Virtual Private Cloud (VPC), which provides a private subnet within the AWS cloud. Each VPC is configured to utilize Routing Rules, Subnet Rules, and Security Group Rules. Each of these controls must have appropriate rules and routes in-place before any external service is able to reach a host within AWS.
+  - Each VPC is configured to utilize Routing Tables, and Security Groups.  Each of these controls must have appropriate rules and routes in-place before any external service is able to reach a host within Cloud Foundry.
+  - Sophos UTM 9 Endpoint Protection is deployed and configured on all instances.
+  - Host Based Firewall rules are enforced to provide security in depth
+  - Each Amazon VPC is a distinct, isolated network within the cloud; network traffic within each Amazon VPC is isolated from all other Amazon VPCs
+
+
+
+
+
 ## SC-7 a
-- ACLs, or traffic flow policies, are established on each managed interface, which manage and enforce the flow of traffic.
+- Cloud Foundry implements network traffic rules using Linux iptables on the component VMs. Operators can configure rules to prevent system access from external networks and between internal components, and to restrict applications from establishing connections over the DEA network interface.
+- Cloud Foundry recommends that you use Cloud Foundry ASGs to specify egress access rules for your applications. This functionality enables you to more securely restrict application outbound traffic to predefined routes.
+- Spoofing: If an IP, MAC, or ARP spoofing attack bypasses the physical firewall for the deployment, Cloud Foundry network traffic rules help prevent the attack from accessing application containers. Cloud Foundry uses application isolation, operating system restrictions, and encrypted connections to further mitigate risk.
 
 
 
