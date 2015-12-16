@@ -1,16 +1,19 @@
 # CM-6
 ## Addressed by:
- - Amazon Elastic Block Store
- - Nessus
- - Amazon Machine Images
- - S3
  - BOSH Stemcells
  - Manifests
+ - Nessus
+ - Amazon Elastic Block Store
+ - S3
+ - Amazon Machine Images
 
 
-## CM-6 a
-- DevOps and Security Engineers maintain the baseline configuration for VPC, EBS and AMIs.  Best practices, FISMA compliant AMIs are utilized as there are no benchmarks available.
+BOSH Stemcells are used for the standard baseline OS images and software vulnerability management updates. Updates to new BOSH stemcells are located and stored within Amazon S3. The specifications of the current release of BOSH stemcells are located on GitHub. DevOps implements Cloud Foundry standard BOSH stemcells for baseline OS configuration.
 
+
+
+
+Cloud Foundry configuration settings are documented within the deployment manifest on the 18F GitHub and Cloud Foundry sites. DevOps implements manifest templates written in yml to automate deployment of multiple applications at once and the platform within AWS with consistency and reproducibility.
 
 
 
@@ -22,8 +25,7 @@ Nessus and AlienVault USM Joval scans are performed at least on a quarterly basi
 
 
 ## CM-6 a
-- DevOps and Security Engineers maintain the baseline configuration for VPC, EBS and AMIs.  Best practices, FISMA compliant AMIs, and hardened cloud formation templates are utilized as there are no benchmarks available.
-- The organization uses FISMA compliant and hardened AMIs within its AWS infrastructure
+- DevOps and Security Engineers maintain the baseline configuration for VPC, EBS and AMIs.  Best practices, FISMA compliant AMIs are utilized as there are no benchmarks available.
 
 
 
@@ -35,12 +37,10 @@ Updates to new BOSH stemcells are located and stored within Amazon S3 http://bos
 
 
 
-BOSH Stemcells are used for the standard baseline OS images and software vulnerability management updates. Updates to new BOSH stemcells are located and stored within Amazon S3. The specifications of the current release of BOSH stemcells are located on GitHub. DevOps implements Cloud Foundry standard BOSH stemcells for baseline OS configuration.
+## CM-6 a
+- DevOps and Security Engineers maintain the baseline configuration for VPC, EBS and AMIs.  Best practices, FISMA compliant AMIs, and hardened cloud formation templates are utilized as there are no benchmarks available.
+- The organization uses FISMA compliant and hardened AMIs within its AWS infrastructure
 
-
-
-
-Cloud Foundry configuration settings are documented within the deployment manifest on the 18F GitHub and Cloud Foundry sites. DevOps implements manifest templates written in yml to automate deployment of multiple applications at once and the platform within AWS with consistency and reproducibility.
 
 
 
