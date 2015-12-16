@@ -1,15 +1,15 @@
 # CM-2
 ## Addressed by:
- - Amazon Elastic Block Store
- - Cloud Formation
- - AlienVault
- - Amazon Elastic Compute Cloud
  - AWS Service Catalog
+ - Cloud Formation
+ - Amazon Elastic Block Store
+ - AlienVault
  - Amazon Machine Images
+ - Amazon Elastic Compute Cloud
  - Manifests
 
 
-DevOps maintain baseline configurations for VPC, EBS, EC2 instances and AMIs. AWS Cloud Formation templates help 18F maintain a strict configuration management scheme of the cloud infrastructure. If an error or misconfiguration of the infrastructure or associated security mechanism (security groups, NACLs) is detected, the administrators can analyze the current infrastructure templates; compare with previous versions, and redeploy the configurations to a known and approved state.
+AWS Service Catalog allows 18F to centrally manage commonly deployed IT services, and helps achieve consistent governance and meet compliance requirements, while enabling users to quickly deploy only the approved IT services they need.
 
 
 
@@ -21,17 +21,12 @@ DevOps maintain baseline configurations for VPC, EBS, EC2 instances and AMIs. AW
 
 
 
-AlienVault USM for AWS is provided by the vendor as a secure hardened AMI image that is deployed using a cloudformation template.
-
-
-
-
 DevOps maintain baseline configurations for VPC, EBS, EC2 instances and AMIs. AWS Cloud Formation templates help 18F maintain a strict configuration management scheme of the cloud infrastructure. If an error or misconfiguration of the infrastructure or associated security mechanism (security groups, NACLs) is detected, the administrators can analyze the current infrastructure templates; compare with previous versions, and redeploy the configurations to a known and approved state.
 
 
 
 
-AWS Service Catalog allows 18F to centrally manage commonly deployed IT services, and helps achieve consistent governance and meet compliance requirements, while enabling users to quickly deploy only the approved IT services they need.
+AlienVault USM for AWS is provided by the vendor as a secure hardened AMI image that is deployed using a cloudformation template.
 
 
 
@@ -41,6 +36,11 @@ AWS Service Catalog allows 18F to centrally manage commonly deployed IT services
 - NIST guidance, best practices, CIS benchmarks along with standard and hardened Operating System AMIs have been utilized.
 - DevOps maintain copies of the latest Production Software Baseline, which includes the following elements: Manufacturer, Type, Version number, Software, Databases, and Stats.
 
+
+
+
+
+DevOps maintain baseline configurations for VPC, EBS, EC2 instances and AMIs. AWS Cloud Formation templates help 18F maintain a strict configuration management scheme of the cloud infrastructure. If an error or misconfiguration of the infrastructure or associated security mechanism (security groups, NACLs) is detected, the administrators can analyze the current infrastructure templates; compare with previous versions, and redeploy the configurations to a known and approved state.
 
 
 
