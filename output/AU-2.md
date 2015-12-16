@@ -1,9 +1,21 @@
 # AU-2
 ## Addressed by:
- - CloudTrail
  - S3
+ - CloudTrail
  - Amazon Elastic Compute Cloud
  - Loggregator
+
+
+## AU-2 a
+- CloudTrail delivers API call information by depositing log files in an Amazon S3 bucket.  Each log file can contain multiple events, and each event represents an API call
+- 18F has implemented AWS CloudTrail for monitoring Amazon EC2, Amazon EBS, and Amazon VPC that captures API calls and delivers the log files to an Amazon S3 bucket. By default, all CloudTrail log files are encrypted by using Amazon S3 server-side encryption (SSE)
+
+
+## AU-2 d
+- 18F has implemented AWS CloudTrail for monitoring Amazon EC2, Amazon EBS, and Amazon VPC that captures API calls and delivers the log files to an Amazon S3 bucket. By default, all CloudTrail  log files are encrypted by using Amazon S3 server-side encryption (SSE)
+
+
+
 
 
 ## AU-2 a
@@ -16,18 +28,6 @@
 - When CloudTrail logging is enabled, API calls made to Amazon EC2, Amazon EBS, and Amazon VPC actions are tracked in log files, along with any other AWS service records. CloudTrail determines when to create and write to a new file based on a specified time period and file size.
 - Every log entry contains information about who generated the request. The user identity information in the log helps  determine whether the request was made with root or IAM user credentials, with temporary security credentials for a role or federated user, or by another AWS service. 
 - CloudTrail publish Amazon SNS notifications when new log files are delivered for 18F staff to review upon log file delivery.
-
-
-
-
-
-## AU-2 a
-- CloudTrail delivers API call information by depositing log files in an Amazon S3 bucket.  Each log file can contain multiple events, and each event represents an API call
-- 18F has implemented AWS CloudTrail for monitoring Amazon EC2, Amazon EBS, and Amazon VPC that captures API calls and delivers the log files to an Amazon S3 bucket. By default, all CloudTrail log files are encrypted by using Amazon S3 server-side encryption (SSE)
-
-
-## AU-2 d
-- 18F has implemented AWS CloudTrail for monitoring Amazon EC2, Amazon EBS, and Amazon VPC that captures API calls and delivers the log files to an Amazon S3 bucket. By default, all CloudTrail  log files are encrypted by using Amazon S3 server-side encryption (SSE)
 
 
 
