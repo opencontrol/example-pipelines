@@ -1,19 +1,19 @@
 # SI-2
 ## Addressed by:
- - OWASP Zap
  - Nessus
+ - OWASP Zap
  - BOSH Stemcells
 
 
 ## SI-2 a
-OWASP Zap (Web Application scanner and penetration test tool) for monthly scanning of all web applications that reside within Cloud Foundry. Upon implementation of the application, authenticated (Web Application) scans will be run on Test instances of the code every major release and minor releases when the release contains a change with a potential security impact.  OWASP Zap reports are reviewed after each scan and appropriate actions taken on discovery of vulnerabilities.
+- Flaw identification is accomplished via Nessus, AlienVault USM, OWASP Zap, and Code Climate static code analysis.  Nessus is a vulnerability, configuration, and compliance scanner.
 
 
 
 
 
 ## SI-2 a
-- Flaw identification is accomplished via Nessus, AlienVault USM, OWASP Zap, and Code Climate static code analysis.  Nessus is a vulnerability, configuration, and compliance scanner.
+OWASP Zap (Web Application scanner and penetration test tool) for monthly scanning of all web applications that reside within Cloud Foundry. Upon implementation of the application, authenticated (Web Application) scans will be run on Test instances of the code every major release and minor releases when the release contains a change with a potential security impact.  OWASP Zap reports are reviewed after each scan and appropriate actions taken on discovery of vulnerabilities.
 
 
 

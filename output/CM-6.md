@@ -1,18 +1,11 @@
 # CM-6
 ## Addressed by:
- - Amazon Elastic Block Store
  - Nessus
  - Amazon Machine Images
+ - Amazon Elastic Block Store
  - S3
  - BOSH Stemcells
  - Manifests
-
-
-## CM-6 a
-- DevOps and Security Engineers maintain the baseline configuration for VPC, EBS and AMIs.  Best practices, FISMA compliant AMIs are utilized as there are no benchmarks available.
-
-
-
 
 
 ## CM-6 d
@@ -24,6 +17,13 @@ Nessus and AlienVault USM Joval scans are performed at least on a quarterly basi
 ## CM-6 a
 - DevOps and Security Engineers maintain the baseline configuration for VPC, EBS and AMIs.  Best practices, FISMA compliant AMIs, and hardened cloud formation templates are utilized as there are no benchmarks available.
 - The organization uses FISMA compliant and hardened AMIs within its AWS infrastructure
+
+
+
+
+
+## CM-6 a
+- DevOps and Security Engineers maintain the baseline configuration for VPC, EBS and AMIs.  Best practices, FISMA compliant AMIs are utilized as there are no benchmarks available.
 
 
 
