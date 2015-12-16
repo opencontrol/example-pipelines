@@ -1,13 +1,11 @@
 # SI-2
 ## Addressed by:
- - Nessus
- - OWASP Zap
  - BOSH Stemcells
+ - OWASP Zap
+ - Nessus
 
 
-## SI-2 a
-- Flaw identification is accomplished via Nessus, AlienVault USM, OWASP Zap, and Code Climate static code analysis.  Nessus is a vulnerability, configuration, and compliance scanner.
-
+Cloud Foundry manages software vulnerability using releases and BOSH stemcells. New Cloud Foundry releases located at https:/github.com/cloudfoundry/cf-release, are created with updates to address code issues, while new stemcells are created with patches for the latest security fixes to address any underlying operating system issues.
 
 
 
@@ -19,7 +17,9 @@ OWASP Zap (Web Application scanner and penetration test tool) for monthly scanni
 
 
 
-Cloud Foundry manages software vulnerability using releases and BOSH stemcells. New Cloud Foundry releases located at https:/github.com/cloudfoundry/cf-release, are created with updates to address code issues, while new stemcells are created with patches for the latest security fixes to address any underlying operating system issues.
+## SI-2 a
+- Flaw identification is accomplished via Nessus, AlienVault USM, OWASP Zap, and Code Climate static code analysis.  Nessus is a vulnerability, configuration, and compliance scanner.
+
 
 
 
