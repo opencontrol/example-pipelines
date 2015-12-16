@@ -1,16 +1,15 @@
 # CM-6
 ## Addressed by:
- - Amazon Elastic Block Store
- - Nessus
  - S3
+ - Nessus
+ - Amazon Elastic Block Store
  - Amazon Machine Images
  - BOSH Stemcells
  - Manifests
 
 
 ## CM-6 a
-- DevOps and Security Engineers maintain the baseline configuration for VPC, EBS and AMIs.  Best practices, FISMA compliant AMIs are utilized as there are no benchmarks available.
-
+Updates to new BOSH stemcells are located and stored within Amazon S3 http://boshartifacts.cloudfoundry.org/file_collections?type=stemcells
 
 
 
@@ -22,7 +21,8 @@ Nessus and AlienVault USM Joval scans are performed at least on a quarterly basi
 
 
 ## CM-6 a
-Updates to new BOSH stemcells are located and stored within Amazon S3 http://boshartifacts.cloudfoundry.org/file_collections?type=stemcells
+- DevOps and Security Engineers maintain the baseline configuration for VPC, EBS and AMIs.  Best practices, FISMA compliant AMIs are utilized as there are no benchmarks available.
+
 
 
 
