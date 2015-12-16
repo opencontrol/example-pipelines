@@ -116,12 +116,14 @@ def cli():
 @click.option('--template_path', default="./templates", help='Path to templates')
 @click.option('--template_file', default="system-data.template", help='Template to process')
 @click.argument('inputs', nargs=-1)
-@click.argument('output', nargs=1, type=click.File('w'))
+@click.argument('output', nargs=1, type=click.File('w', encoding='utf-8'))
 def create_ssp_yaml(template_path, template_file, inputs, output):
     context = load_data_tree(inputs)
-    TEMPLATE_ENVIRONMENT.loader = FileSystemLoader(os.path.join(PATH, template_path))
+    full_template_path = os.path.join(PATH, template_path)
+    print ("Full template path is %s " % (full_template_path))
+    TEMPLATE_ENVIRONMENT.loader = FileSystemLoader(full_template_path)
     yml = render_template(template_file, context)
-    output.write(yml.encode('utf-8'))
+    output.write(yml)
 
 
 @cli.command('markdown')
@@ -135,7 +137,7 @@ def create_docbook_markdown(template_path, manifest_file, inputs, output_path):
     manifest = read_template_as_yaml(manifest_file, context)
     for page in manifest['pages']:
         print ("Generating ", page['filename'])
-        with open("%s/%s" % (output_path, page['filename']), 'w') as output:
+        with open("%s/%s" % (output_path, page['filename']), 'wb') as output:
             local_context = {'data_tree' : dpath_search(page['dpath_query'], context['data_tree'])}
             if 'extra_context' in page:
                 local_context.update(page['extra_context'])
