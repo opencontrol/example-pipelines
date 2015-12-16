@@ -1,13 +1,9 @@
 # RA-5
 ## Addressed by:
  - Nessus
+ - AlienVault
  - Amazon Machine Images
  - OWASP Zap
- - AlienVault
-
-
-## RA-5 c
-- AlienVault USM for AWS, OWASP Zap and Tenable Nessus reports are reviewed and analyzed at least weekly and appropriate actions taken on discovery of vulnerabilities within the 18F Cloud Infrastructure and applications and from security control assessments conducted on its information systems.
 
 
 ## RA-5 a
@@ -20,6 +16,15 @@
 - Nessus, and AlienVault USM for AWS utilize tools and techniques that promote interoperability such as Common Vulnerability Scoring System v2 (CVSS2), Common Platform Enumeration (CPE), and Common Vulnerability Enumeration (CVE). Tenable SecurityCenter is able to output reports in CyberScope format to meet NIST, DHS, and GSA reporting requirements.
 
 
+## RA-5 c
+- AlienVault USM for AWS, OWASP Zap and Tenable Nessus reports are reviewed and analyzed at least weekly and appropriate actions taken on discovery of vulnerabilities within the 18F Cloud Infrastructure and applications and from security control assessments conducted on its information systems.
+
+
+
+
+
+AlienVault USM for AWS runs AWS friendly Authenticated vulnerability scans within the AWS infrastructure
+
 
 
 
@@ -31,13 +36,6 @@
 
 
 
-
-
-## RA-5 c
-OWASP Zap reports are reviewed and analyzed at least weekly and 
-appropriate actions taken on discovery of vulnerabilities within 
-the 18F Cloud Infrastructure and applications and from security 
-control assessments conducted on its information systems.
 
 
 ## RA-5 a
@@ -54,10 +52,12 @@ as Common Vulnerability Scoring System v2 (CVSS2), Common Platform
 Enumeration (CPE), and Common Vulnerability Enumeration (CVE). 
 
 
+## RA-5 c
+OWASP Zap reports are reviewed and analyzed at least weekly and 
+appropriate actions taken on discovery of vulnerabilities within 
+the 18F Cloud Infrastructure and applications and from security 
+control assessments conducted on its information systems.
 
-
-
-AlienVault USM for AWS runs AWS friendly Authenticated vulnerability scans within the AWS infrastructure
 
 
 
