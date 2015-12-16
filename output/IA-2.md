@@ -1,15 +1,9 @@
 # IA-2
 ## Addressed by:
- - S3
  - Identity and Access Management
+ - S3
  - Amazon Elastic Compute Cloud
  - User Account and Authentication (UAA) Server
-
-
-## IA-2 a
-Additional temporary permission are delegated with the IAM roles usually for applications that run on EC2 Instanc.es in order to access AWS resources (i.e. Amazon S3 buckets, DynamoDB data)
-
-
 
 
 - All users have individually unique identifiers to access and authenticate to the AWS environment through the AWS management console.
@@ -18,6 +12,12 @@ Additional temporary permission are delegated with the IAM roles usually for app
 - All user accounts for 18F staff are maintained within the 18F AWS Environment.
 - Shared or group authenticators are not utilized; Service accounts are implemented as Managed Services Accounts within AWS.
 
+
+
+
+
+## IA-2 a
+Additional temporary permission are delegated with the IAM roles usually for applications that run on EC2 Instanc.es in order to access AWS resources (i.e. Amazon S3 buckets, DynamoDB data)
 
 
 
