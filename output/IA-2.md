@@ -1,8 +1,8 @@
 # IA-2
 ## Addressed by:
  - Identity and Access Management
- - Amazon Elastic Compute Cloud
  - S3
+ - Amazon Elastic Compute Cloud
  - User Account and Authentication (UAA) Server
 
 
@@ -16,14 +16,14 @@
 
 
 
-- Additional temporary permission are delegated with the IAM roles usually for applications that run on EC2 Instanc.es in order to access AWS resources (i.e. Amazon S3 buckets, DynamoDB data)
-
-
-
-
-
 ## IA-2 a
 Additional temporary permission are delegated with the IAM roles usually for applications that run on EC2 Instanc.es in order to access AWS resources (i.e. Amazon S3 buckets, DynamoDB data)
+
+
+
+
+- Additional temporary permission are delegated with the IAM roles usually for applications that run on EC2 Instanc.es in order to access AWS resources (i.e. Amazon S3 buckets, DynamoDB data)
+
 
 
 
