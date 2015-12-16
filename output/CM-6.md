@@ -1,23 +1,11 @@
 # CM-6
 ## Addressed by:
- - Nessus
- - S3
  - Amazon Elastic Block Store
+ - Nessus
  - Amazon Machine Images
+ - S3
  - BOSH Stemcells
  - Manifests
-
-
-## CM-6 d
-Nessus and AlienVault USM Joval scans are performed at least on a quarterly basis in the event that no enhancements or upgrades are performed. Both tools meet NIST’s SCAP 1.2 requirements, satisfying OMB Mandate M-08-22 and associated procurement requirements. SCAP scans are performed weekly and monthly to ensure no unauthorized changes, enhancements or upgrades are performed.
-
-
-
-
-## CM-6 a
-Updates to new BOSH stemcells are located and stored within Amazon S3 http://boshartifacts.cloudfoundry.org/file_collections?type=stemcells
-
-
 
 
 ## CM-6 a
@@ -27,10 +15,22 @@ Updates to new BOSH stemcells are located and stored within Amazon S3 http://bos
 
 
 
+## CM-6 d
+Nessus and AlienVault USM Joval scans are performed at least on a quarterly basis in the event that no enhancements or upgrades are performed. Both tools meet NIST’s SCAP 1.2 requirements, satisfying OMB Mandate M-08-22 and associated procurement requirements. SCAP scans are performed weekly and monthly to ensure no unauthorized changes, enhancements or upgrades are performed.
+
+
+
+
 ## CM-6 a
 - DevOps and Security Engineers maintain the baseline configuration for VPC, EBS and AMIs.  Best practices, FISMA compliant AMIs, and hardened cloud formation templates are utilized as there are no benchmarks available.
 - The organization uses FISMA compliant and hardened AMIs within its AWS infrastructure
 
+
+
+
+
+## CM-6 a
+Updates to new BOSH stemcells are located and stored within Amazon S3 http://boshartifacts.cloudfoundry.org/file_collections?type=stemcells
 
 
 
