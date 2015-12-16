@@ -1,14 +1,16 @@
 # SC-7
 ## Addressed by:
- - Access Control List
+ - Application Security Groups
  - Amazon Elastic Compute Cloud
  - Amazon Virtual Private Cloud
  - Sophos UTM
- - Application Security Groups
+ - Access Control List
 
 
 ## SC-7 a
-- ACLs, or traffic flow policies, are established on each managed interface, which manage and enforce the flow of traffic.
+- Cloud Foundry implements network traffic rules using Linux iptables on the component VMs. Operators can configure rules to prevent system access from external networks and between internal components, and to restrict applications from establishing connections over the DEA network interface.
+- Cloud Foundry recommends that you use Cloud Foundry ASGs to specify egress access rules for your applications. This functionality enables you to more securely restrict application outbound traffic to predefined routes.
+- Spoofing: If an IP, MAC, or ARP spoofing attack bypasses the physical firewall for the deployment, Cloud Foundry network traffic rules help prevent the attack from accessing application containers. Cloud Foundry uses application isolation, operating system restrictions, and encrypted connections to further mitigate risk.
 
 
 
@@ -34,21 +36,19 @@
 
 
 
-## SC-7 a
-- Sophos UTM 9 for AWS is deployed and configured on all instances
-
-
 ## SC-7 b
 - Sophos UTM 9 Endpoint Protection is deployed and configured on all instances.
 
 
+## SC-7 a
+- Sophos UTM 9 for AWS is deployed and configured on all instances
+
+
 
 
 
 ## SC-7 a
-- Cloud Foundry implements network traffic rules using Linux iptables on the component VMs. Operators can configure rules to prevent system access from external networks and between internal components, and to restrict applications from establishing connections over the DEA network interface.
-- Cloud Foundry recommends that you use Cloud Foundry ASGs to specify egress access rules for your applications. This functionality enables you to more securely restrict application outbound traffic to predefined routes.
-- Spoofing: If an IP, MAC, or ARP spoofing attack bypasses the physical firewall for the deployment, Cloud Foundry network traffic rules help prevent the attack from accessing application containers. Cloud Foundry uses application isolation, operating system restrictions, and encrypted connections to further mitigate risk.
+- ACLs, or traffic flow policies, are established on each managed interface, which manage and enforce the flow of traffic.
 
 
 
