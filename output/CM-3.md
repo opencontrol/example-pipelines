@@ -5,12 +5,12 @@
  - S3
 
 
-## CM-3 a
-- 18F uses several version control systems(i.e. AWS Config, AWS Service Catalog) with its templates to know exactly what changes were made, who made them, and when. If at any point 18F needs to reverse changes to infrastructure, you can use a previous version of a template.
-
-
 ## CM-3 c
 - For changes related to the AWS infrastructure, 18F uses AWS Service Catalog, AWS Config, VisualOps and AlienVault USM for AWS for real-time configuration changes which are documented, approved and tracked within GitHub.
+
+
+## CM-3 a
+- 18F uses several version control systems(i.e. AWS Config, AWS Service Catalog) with its templates to know exactly what changes were made, who made them, and when. If at any point 18F needs to reverse changes to infrastructure, you can use a previous version of a template.
 
 
 
