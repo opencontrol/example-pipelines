@@ -1,13 +1,15 @@
 # CM-8
 ## Addressed by:
- - AlienVault
- - AWS Config
  - Amazon Elastic Compute Cloud
+ - AWS Config
+ - AlienVault
  - S3
  - VisualOps
 
 
-AlienVault USM is currently deployed and used by 18F to facilitate asset management, along with other operations activities, on a real-time ongoing basis.
+## CM-8 a
+- AWS Config provides a detailed inventory of all 18F AWS resources and their current configuration, and continuously records configuration changes (e.g., the value of tags on Amazon EC2 instances, ingress/egress rules of security groups, and Network ACL rules for VPCs).
+
 
 
 
@@ -21,9 +23,7 @@ AlienVault USM is currently deployed and used by 18F to facilitate asset managem
 
 
 
-## CM-8 a
-- AWS Config provides a detailed inventory of all 18F AWS resources and their current configuration, and continuously records configuration changes (e.g., the value of tags on Amazon EC2 instances, ingress/egress rules of security groups, and Network ACL rules for VPCs).
-
+AlienVault USM is currently deployed and used by 18F to facilitate asset management, along with other operations activities, on a real-time ongoing basis.
 
 
 
