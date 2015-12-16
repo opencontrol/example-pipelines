@@ -1,12 +1,18 @@
 # SI-4
 ## Addressed by:
- - AlienVault
- - Amazon Machine Images
  - Amazon Elastic Compute Cloud
+ - Amazon Machine Images
+ - AlienVault
  - HM9000
 
 
-Alienvault USM for AWS monitors for attacks and indicators of potential attacks,  unauthorized local, network, and remote connections using  built-in, essential security controls and threat intelligence
+## SI-4 a
+- All Cloud Foundry EC2 instances will be monitored for attacks and unauthorized connections through Alienvault USM
+
+
+## SI-4 b
+- All Cloud Foundry EC2 instances will be monitored for attacks and unauthorized connections through Alienvault USM
+
 
 
 
@@ -19,13 +25,7 @@ Alienvault USM for AWS monitors for attacks and indicators of potential attacks,
 
 
 
-## SI-4 a
-- All Cloud Foundry EC2 instances will be monitored for attacks and unauthorized connections through Alienvault USM
-
-
-## SI-4 b
-- All Cloud Foundry EC2 instances will be monitored for attacks and unauthorized connections through Alienvault USM
-
+Alienvault USM for AWS monitors for attacks and indicators of potential attacks,  unauthorized local, network, and remote connections using  built-in, essential security controls and threat intelligence
 
 
 
